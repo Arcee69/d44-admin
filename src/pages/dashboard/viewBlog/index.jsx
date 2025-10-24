@@ -9,6 +9,7 @@ import PaginationControlled from '../../../components/Pagination';
 import { appUrls } from '../../../services/urls';
 import { api } from '../../../services/api';
 import axios from 'axios';
+import ChangeBlogStatus from './components/ChangeBlogStatus';
 
 
 const ViewBlog = () => {
@@ -20,6 +21,7 @@ const ViewBlog = () => {
     const [openUpdateBlogPost, setOpenUpdateBlogPost] = useState(false);
     const [updateBlogPost, setUpdateBlogPost] = useState();
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [openChangeStatusModal, setOpenChangeStatusModal] = useState(false);
     const [data, setData] = useState();
 
     const navigate = useNavigate()
@@ -77,8 +79,14 @@ const ViewBlog = () => {
                                     >
                                         <div className='flex flex-col gap-3 p-3'>
                                             <p 
-                                            className='cursor-pointer hover:bg-[#F8F8F8] p-1' 
-                                            onClick={() => {setOpenDeleteModal(true), setData(blog)}}
+                                                className='cursor-pointer hover:bg-[#F8F8F8] p-1' 
+                                                onClick={() => {setOpenChangeStatusModal(true), setData(blog)}}
+                                            >
+                                                Change Status
+                                            </p>
+                                            <p 
+                                                className='cursor-pointer hover:bg-[#F8F8F8] p-1' 
+                                                onClick={() => {setOpenDeleteModal(true), setData(blog)}}
                                             >
                                                 Delete
                                             </p>
@@ -86,10 +94,10 @@ const ViewBlog = () => {
                                                 to="/update-blog"
                                                 state={blog}
                                                 className='cursor-pointer hover:bg-[#F8F8F8] p-1'
-                                                // onClick={() => {navigate("/update-blog"), setUpdateBlogPost(blog)}}
                                             >
                                                 Edit
                                             </Link>
+                                    
                                         </div>
                                     </LongMenu>
                                 </div>
@@ -129,6 +137,12 @@ const ViewBlog = () => {
         <ModalPop isOpen={openDeleteModal}>
             <DeleteBlog 
                 handleClose={() => setOpenDeleteModal(false)} 
+                data={data}
+            />
+        </ModalPop>
+        <ModalPop isOpen={openChangeStatusModal}>
+            <ChangeBlogStatus
+                handleClose={() => setOpenChangeStatusModal(false)} 
                 data={data}
             />
         </ModalPop>

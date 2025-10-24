@@ -21,6 +21,7 @@ const CreateBlog = () => {
 
     const formValidationSchema = Yup.object().shape({
         title: Yup.string().required("Blog Title is Required"),
+        author: Yup.string().required("Author is Required"),
         imageDoc: Yup.mixed().required('Blog Image is required'),
         description: Yup.mixed().required("Contest Description is Required")
     });
@@ -31,7 +32,7 @@ const CreateBlog = () => {
         formData.append("title", values?.title);
         formData.append("status", "publish");
         formData.append("body", values?.description);
-        formData.append("category", values?.category);
+        formData.append("author", values?.author);
         formData.append("image", values?.imageDoc);
 
         await api.post(appUrls?.CREATE_POST_URL, formData)
@@ -74,7 +75,7 @@ const CreateBlog = () => {
                         initialValues={{
                             title: "",
                             post: "",
-                            category: "",
+                            author: "",
                             imageDoc: "",
                         }}
                         validationSchema={formValidationSchema}
@@ -111,6 +112,20 @@ const CreateBlog = () => {
                                     />
                                     {errors.title && touched.title ? (
                                     <div className='text-RED-_100'>{errors.title}</div>
+                                    ) : null}
+                                </div>
+                                <div className="flex flex-col mx-2  ">
+                                    <label htmlFor='author' className="text-base text-left font-semibold text-[#000000]">Author</label>
+                                    <input
+                                        name="author"
+                                        placeholder="Author Name"
+                                        type="text" 
+                                        value={values.author}
+                                        onChange={handleChange}
+                                        className="rounded outline-none shadow lg:w-[507px] h-[44px] border-solid  p-3 border"
+                                    />
+                                    {errors.author && touched.author ? (
+                                    <div className='text-RED-_100'>{errors.author}</div>
                                     ) : null}
                                 </div>
 

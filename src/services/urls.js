@@ -9,14 +9,13 @@ export const appUrls = {
     CREATE_POST_URL: "/v1/post",
     UPDATE_POST_URL: "/v1/post",
     DELETE_POST_URL: "/v1/post",
+    CHANGE_POST_STATUS_URL: "/v1/post/change-status",
 
-
-
-
-  
 
     //USER MANAGEMENT ENDPOINT
     CREATE_USER_URL: "/v1/user/create",
+    EDIT_USER_URL: "/v1/user/update",
+    USER_URL: "/v1/user",
 
 
     

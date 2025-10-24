@@ -19,6 +19,7 @@ import Newsletter from '../pages/dashboard/newsletter';
 
 import Admins from '../pages/dashboard/admins';
 import AddAdmin from '../pages/dashboard/admins/components/AddAdmin';
+import EditAdmin from '../pages/dashboard/admins/components/EditAdmin';
 
 
 
@@ -35,12 +36,12 @@ export default function Routers () {
               <Route path="/update-blog" element={<UpdateBlog />} />
               <Route path="/blog" element={<ViewBlog />} />
               <Route path="/view-blog" element={<ViewBlog />} />
-         
-              
+        
       
               <Route path="/admins" element={<Admins />} />
               <Route path="/view-admins" element={<Admins />} />
               <Route path="/add-admin" element={<AddAdmin />} />
+              <Route path="/edit-admin" element={<EditAdmin />} />
             </Route>
 
             <Route element={<AuthProtectRoutes />}>

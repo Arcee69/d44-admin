@@ -16,6 +16,7 @@ const AddAdmin = () => {
      const formValidationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
         email: Yup.string().required('Email is required'),
+        role: Yup.string().required('Role is required'),
     });
 
 
@@ -24,6 +25,7 @@ const AddAdmin = () => {
         const data = {
             "name": values.name,
             "email": values.email,
+            "role": values.role,
         }
         try {
             const res = await api.post(appUrls?.CREATE_USER_URL, data)
@@ -63,7 +65,8 @@ const AddAdmin = () => {
                         <Formik
                             initialValues={{
                                 name: "",
-                                email: ""
+                                email: "",
+                                role: "",
                             }}
                             validationSchema={formValidationSchema}
                             enableReinitialize={true}
@@ -114,6 +117,24 @@ const AddAdmin = () => {
                                     />
                                     {errors.email && touched.email ? (
                                     <div className='text-RED-_100'>{errors.email}</div>
+                                    ) : null}
+                                </div>    
+
+                                <div className="flex flex-col mx-2">
+                                    <label htmlFor='role' className="text-base text-left font-semibold text-[#000000]">Role</label>
+                                    <select
+                                        name="role"
+                                        value={values.role}
+                                        onChange={handleChange}
+                                        className="rounded outline-none shadow lg:w-[507px] h-[44px] border-solid  p-3 border"
+                                    >
+                                        <option value="">Select</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="super admin">Super Admin</option>
+                                    </select>
+                                 
+                                    {errors.role && touched.role ? (
+                                    <div className='text-RED-_100'>{errors.role}</div>
                                     ) : null}
                                 </div>                    
                             

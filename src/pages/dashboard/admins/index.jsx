@@ -6,6 +6,7 @@ import DeleteAdmin from './components/DeleteAdmin';
 
 import { appUrls } from '../../../services/urls';
 import { api } from '../../../services/api';
+import { Link } from 'react-router-dom';
 
 
 
@@ -22,7 +23,7 @@ const Admins = () => {
     const fetchAdmin = async () => {
         setLoading(true)
         try {
-          const res = await api.get(appUrls?.CREATE_USER_URL);
+          const res = await api.get(appUrls?.USER_URL);
           console.log(res, "addict")
           const data = res.data;
     
@@ -85,6 +86,13 @@ const Admins = () => {
                                             >
                                                 Delete
                                             </p>
+                                            <Link 
+                                                to="/edit-admin"
+                                                state={admin}
+                                                className='cursor-pointer hover:bg-[#F8F8F8] p-1'
+                                            >
+                                                Edit
+                                            </Link>
                                         </div>
                                     </LongMenu>
                                 </div>

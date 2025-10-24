@@ -20,10 +20,14 @@ const UpdateBlog = () => {
 
     const { state } = useLocation()
     // console.log(state, "opor")
-    const token = localStorage.getItem("token")
+
+    const token = localStorage.getItem('token')
+
+    let baseURL = import.meta.env.VITE_APP_API_URL;
 
     const formValidationSchema = Yup.object().shape({
         title: Yup.string().required("Blog Title is Required"),
+        author: Yup.string().required("Author is Required"),
         imageDoc: Yup.mixed().required('Blog Image is required'),
         description: Yup.mixed().required("Contest Description is Required")
     });
@@ -36,9 +40,15 @@ const UpdateBlog = () => {
         formData.append("title", values?.title);
         formData.append("body", values?.description);
         formData.append("image", values?.imageDoc);
+        formData.append("author", values?.author);
         formData.append("status", "publish");
 
-        await api.post(appUrls?.UPDATE_POST_URL +`/${state?.id}`, formData)
+        await axios.post(`${baseURL}${appUrls?.UPDATE_POST_URL}/${state?.id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                "Authorization": `Bearer ${token}`
+            }
+        })
         .then((res) => {
             // console.log(res, "try")
             toast("Blog Updated Successfully", {
@@ -59,39 +69,6 @@ const UpdateBlog = () => {
             setLoading(false)
         })
     }
-
-    // const updateImage = async (values, actions) => {
-    //     const formData = new FormData()
-
-    //     formData.append("post_id", state?.id);
-    //     formData.append("image", values?.imageDoc);
-
-    //     await  axios.post(`https://api.admin.noa.gov.ng/api/post/update-image`, formData, {
-    //         headers: {
-    //             "Authorization": `Bearer ${token}`,
-    //             "Content-Type": "multipart/form-data"
-    //         }
-    //     })
-    //     .then((res) => {
-    //         console.log(res, "pop");
-    //         setLoading(false)
-    //         toast(`${res?.data?.message}`, { 
-    //             position: "top-right",
-    //             autoClose: 3500,
-    //             closeOnClick: true,
-    //         });
-    //         actions.resetForm()
-    //     }) 
-    //     .catch((err) => {
-    //         console.log(err, "pop");
-    //         setLoading(false)
-    //         toast(`${err?.data?.message}`, { 
-    //             position: "top-right",
-    //             autoClose: 3500,
-    //             closeOnClick: true,
-    //         });
-    //     })
-    // }
   
 
   return (
@@ -112,6 +89,7 @@ const UpdateBlog = () => {
                         <Formik
                         initialValues={{
                             title: state?.title || "",
+                            author: state?.author || "",
                             description: state?.body || "",
                             imageDoc: "",
                         }}
@@ -121,9 +99,6 @@ const UpdateBlog = () => {
                             // window.scrollTo(0, 0)
                             console.log(values, "often")
                             submitForm(values, actions)
-                            // if(values?.imageDoc) {
-                            //     updateImage(values, actions)
-                            // }
                         }}
                         >
                         {({
@@ -155,6 +130,21 @@ const UpdateBlog = () => {
                                     ) : null}
                                 </div>
 
+                                <div className="flex flex-col mx-2  ">
+                                    <label htmlFor='author' className="text-base text-left font-semibold text-[#000000]">Author</label>
+                                    <input
+                                        name="author"
+                                        placeholder="Author Name"
+                                        type="text" 
+                                        value={values.author}
+                                        onChange={handleChange}
+                                        className="rounded outline-none shadow lg:w-[507px] h-[44px] border-solid  p-3 border"
+                                    />
+                                    {errors.author && touched.author ? (
+                                    <div className='text-RED-_100'>{errors.author}</div>
+                                    ) : null}
+                                </div>
+
                                 <div className="flex flex-col xs:mt-4 lg:mt-0 lg:w-12/12">
                                     {values?.imageDoc
                                     ? 
@@ -173,7 +163,6 @@ const UpdateBlog = () => {
                                     <input
                                         type="file"
                                         name="imageDoc"
-                                        value={values?.imageDoc}
                                         className="opacity-0"
                                         onChange={(e) => {setFieldValue("imageDoc", e.target.files[0])}}
                                         id="upload"

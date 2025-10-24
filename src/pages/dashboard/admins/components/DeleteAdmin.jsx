@@ -11,7 +11,7 @@ const DeleteAdmin = ({ handleClose, data }) => {
 
     const deleteAdmin = async () => {
         setLoading(true)
-        await api.delete(appUrls?.CREATE_USER_URL + `/${data?.id}`)
+        await api.delete(appUrls?.USER_URL + `/${data?.id}`)
         .then((res) => {
             toast("Admin Deleted Successfully", {
                 position: "top-right",
