@@ -69,7 +69,7 @@ export default function Header({ setOpenMobileSidebar }) {
               localStorage.removeItem("userObj")
               localStorage.removeItem("token")
               // navigate("/")
-              navigate("/cms")
+              navigate("/")
             }}
           >
             Logout
