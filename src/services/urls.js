@@ -19,9 +19,10 @@ export const appUrls = {
 
     //PROJECT CRUD ENDPOINT
     PROJECT_URL: "/v1/project",
-    CHANGE_PROJECT_STATUS_URL: "/v1/project/change-status"
+    CHANGE_PROJECT_STATUS_URL: "/v1/project/change-status",
 
-
+    // CONTRACT ENDPOINT
+    CONTRACT_URL: "/v1/contact"
     
    
 };
