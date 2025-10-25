@@ -22,7 +22,7 @@ const ViewBlog = () => {
     const [updateBlogPost, setUpdateBlogPost] = useState();
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [openChangeStatusModal, setOpenChangeStatusModal] = useState(false);
-    const [data, setData] = useState();
+    const [data, setData] = useState([]);
 
     const navigate = useNavigate()
     
@@ -74,9 +74,7 @@ const ViewBlog = () => {
                             <div className='flex flex-col'>
                                 <p className='font-bold text-lg'>{blog?.title}</p>
                                 <div className='flex items-end justify-end'>
-                                    <LongMenu
-                                        // action={(action) => handleMenuClick(action, blog)} 
-                                    >
+                                    <LongMenu>
                                         <div className='flex flex-col gap-3 p-3'>
                                             <p 
                                                 className='cursor-pointer hover:bg-[#F8F8F8] p-1' 
