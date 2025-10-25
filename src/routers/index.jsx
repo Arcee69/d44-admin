@@ -14,12 +14,13 @@ import ViewBlog from '../pages/dashboard/viewBlog';
 import UpdateBlog from '../pages/dashboard/viewBlog/components/UpdateBlog';
 
 
-import Newsletter from '../pages/dashboard/newsletter';
-
-
 import Admins from '../pages/dashboard/admins';
 import AddAdmin from '../pages/dashboard/admins/components/AddAdmin';
 import EditAdmin from '../pages/dashboard/admins/components/EditAdmin';
+import Contacts from '../pages/dashboard/contacts';
+import AddProject from '../pages/dashboard/projects/components/AddProject';
+import UpdateProject from '../pages/dashboard/projects/components/UpdateProject';
+import Projects from '../pages/dashboard/projects';
 
 
 
@@ -31,11 +32,17 @@ export default function Routers () {
         <Routes>
 
             <Route element={<ProtectRoutes /> }>
-              <Route path="/newsletter" element={<Newsletter />} />
               <Route path="/create-blog" element={<CreateBlog />} />
               <Route path="/update-blog" element={<UpdateBlog />} />
               <Route path="/blog" element={<ViewBlog />} />
               <Route path="/view-blog" element={<ViewBlog />} />
+
+              <Route path="/contacts" element={<Contacts />} />
+
+              <Route path="/create-project" element={<AddProject />} />
+              <Route path="/update-project" element={<UpdateProject />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/view-projects" element={<Projects />} />
         
       
               <Route path="/admins" element={<Admins />} />

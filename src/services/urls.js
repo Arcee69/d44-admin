@@ -17,6 +17,10 @@ export const appUrls = {
     EDIT_USER_URL: "/v1/user/update",
     USER_URL: "/v1/user",
 
+    //PROJECT CRUD ENDPOINT
+    PROJECT_URL: "/v1/project",
+    CHANGE_PROJECT_STATUS_URL: "/v1/project/change-status"
+
 
     
    

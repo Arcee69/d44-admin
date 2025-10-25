@@ -47,22 +47,28 @@ export default function Sidebar() {
       ],
     },
     {
-      title: "Contacts",
-      itemId: "/contacts",
+      title: "Projects",
+      itemId: "/projects",
       icon: () => <img src={dashboardIcon} alt="icon" />,
       children: true,
       subNav: [
         {
           title: "View",
-          itemId: "/view-contacts",
+          itemId: "/view-projects",
           icon: () => <img src={dashboardIcon} alt="icon" />,
         },
         {
-          title: "Add",
-          itemId: "/add-contacts",
+          title: "Create",
+          itemId: "/create-project",
           icon: () => <img src={dashboardIcon} alt="icon" />,
         },
       ],
+    },
+    {
+      title: "Contacts",
+      itemId: "/contacts",
+      icon: () => <img src={dashboardIcon} alt="icon" />,
+      children: false,
     },
   ];
 
