@@ -25,59 +25,59 @@ const AddProject = () => {
 
     const formValidationSchema = Yup.object().shape({
         title: Yup.string().required("Project Title is Required"),
-        category: Yup.string().required("Category is Required"),
+        // category: Yup.string().required("Category is Required"),
         imageDoc: Yup.mixed().required('Project Image is required'),
         description: Yup.mixed().required("Project Description is Required")
     });
 
-    const addKeyFeature = () => {
-        setKeyFeatures([...keyFeatures, '']);
-    };
+    // const addKeyFeature = () => {
+    //     setKeyFeatures([...keyFeatures, '']);
+    // };
 
-    const removeKeyFeature = (index) => {
-        if (keyFeatures.length > 1) {
-            const updatedFeatures = keyFeatures.filter((_, i) => i !== index);
-            setKeyFeatures(updatedFeatures);
-        }
-    };
+    // const removeKeyFeature = (index) => {
+    //     if (keyFeatures.length > 1) {
+    //         const updatedFeatures = keyFeatures.filter((_, i) => i !== index);
+    //         setKeyFeatures(updatedFeatures);
+    //     }
+    // };
 
-    const updateKeyFeature = (index, value) => {
-        const updatedFeatures = [...keyFeatures];
-        updatedFeatures[index] = value;
-        setKeyFeatures(updatedFeatures);
-    };
+    // const updateKeyFeature = (index, value) => {
+    //     const updatedFeatures = [...keyFeatures];
+    //     updatedFeatures[index] = value;
+    //     setKeyFeatures(updatedFeatures);
+    // };
 
     const submitForm = async (values, actions) => {
         setLoading(true)
         
         // Validate that at least one key feature is provided
-        const validKeyFeatures = keyFeatures.filter(feature => feature.trim() !== '');
-        if (validKeyFeatures.length === 0) {
-            toast("Please add at least one key feature", {
-                position: "top-right",
-                autoClose: 5000,
-                closeOnClick: true,
-            });
-            setLoading(false);
-            return;
-        }
+        // const validKeyFeatures = keyFeatures.filter(feature => feature.trim() !== '');
+        // if (validKeyFeatures.length === 0) {
+        //     toast("Please add at least one key feature", {
+        //         position: "top-right",
+        //         autoClose: 5000,
+        //         closeOnClick: true,
+        //     });
+        //     setLoading(false);
+        //     return;
+        // }
 
         const formData = new FormData()
         formData.append("title", values?.title);
         formData.append("status", "publish");
         formData.append("desc", values?.description);
-        formData.append("category", values?.category);
+        // formData.append("category", values?.category);
         formData.append("image", values?.imageDoc);
 
         // Add key_features to formData
-        validKeyFeatures.forEach((feature, index) => {
-            formData.append(`key_features[${index}]`, feature.trim());
-        });
+        // validKeyFeatures.forEach((feature, index) => {
+        //     formData.append(`key_features[${index}]`, feature.trim());
+        // });
 
         // Log form data for debugging
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
+        // for (let [key, value] of formData.entries()) {
+        //     console.log(key, value);
+        // }
 
         await axios.post(`${baseURL}${appUrls?.PROJECT_URL}`, formData, {
             headers: {
@@ -123,7 +123,7 @@ const AddProject = () => {
                         <Formik
                         initialValues={{
                           title: "",
-                          category: "",
+                        //   category: "",
                           imageDoc: "",
                           description: "",
                         }}
@@ -164,7 +164,7 @@ const AddProject = () => {
                                 </div>
 
                                 {/* Category Field */}
-                                <div className="flex flex-col mx-2">
+                                {/* <div className="flex flex-col mx-2">
                                     <label htmlFor='category' className="text-base text-left font-semibold text-[#000000]">Category</label>
                                     <select
                                         name="category"
@@ -180,10 +180,10 @@ const AddProject = () => {
                                     {errors.category && touched.category ? (
                                     <div className='text-RED-_100'>{errors.category}</div>
                                     ) : null}
-                                </div>
+                                </div> */}
 
                                 {/* Key Features Field */}
-                                <div className="flex flex-col mx-2 gap-3">
+                                {/* <div className="flex flex-col mx-2 gap-3">
                                     <label className="flex items-center justify-between">
                                         <p className="text-base text-left font-semibold text-[#000000]">Key Features</p>
                                         <button 
@@ -220,7 +220,7 @@ const AddProject = () => {
                                     {keyFeatures.filter(f => f.trim() === '').length === keyFeatures.length && (
                                         <div className='text-yellow-600 text-sm'>Add at least one key feature</div>
                                     )}
-                                </div>
+                                </div> */}
 
                                 {/* Image Upload Field */}
                                 <div className="flex flex-col xs:mt-4 lg:mt-0 w-11/12">
