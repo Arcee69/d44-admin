@@ -89,9 +89,9 @@ const UpdateProject = () => {
         // formData.append("category", values?.category);
         
         // Only append image if a new one was selected
-        // if (values?.imageDoc && values.imageDoc instanceof File) {
-        //     formData.append("image", values?.imageDoc);
-        // }
+        if (values?.imageDoc && values.imageDoc instanceof File) {
+            formData.append("image", values?.imageDoc);
+        }
 
         // Add key_features to formData
         // validKeyFeatures.forEach((feature, index) => {
